@@ -6,21 +6,21 @@ const ADD_ONE = 'pokemon/ADD_ONE';
 
 const load = list => ({
   type: LOAD,
-  list,
+  list
 });
 
 const loadTypes = types => ({
   type: LOAD_TYPES,
-  types,
+  types
 });
 
 const addOnePokemon = pokemon => ({
   type: ADD_ONE,
-  pokemon,
+  pokemon
 });
 
 export const getPokemon = () => async dispatch => {
-  const response = await fetch(`/api/pokemon`);
+  const response = await fetch('/api/pokemon');
 
   if (response.ok) {
     const list = await response.json();
@@ -29,7 +29,7 @@ export const getPokemon = () => async dispatch => {
 };
 
 export const getPokemonTypes = () => async dispatch => {
-  const response = await fetch(`/api/pokemon/types`);
+  const response = await fetch('/api/pokemon/types');
 
   if (response.ok) {
     const types = await response.json();
@@ -58,13 +58,13 @@ const pokemonReducer = (state = initialState, action) => {
       return {
         ...allPokemon,
         ...state,
-        list: sortList(action.list),
+        list: sortList(action.list)
       };
     }
     case LOAD_TYPES: {
       return {
         ...state,
-        types: action.types,
+        types: action.types
       };
     }
     case ADD_ONE: {
@@ -82,7 +82,7 @@ const pokemonReducer = (state = initialState, action) => {
         ...state,
         [action.pokemon.id]: {
           ...state[action.pokemon.id],
-          ...action.pokemon,
+          ...action.pokemon
         }
       };
     }
@@ -91,7 +91,7 @@ const pokemonReducer = (state = initialState, action) => {
         ...state,
         [action.pokemonId]: {
           ...state[action.pokemonId],
-          items: action.items.map(item => item.id),
+          items: action.items.map(item => item.id)
         }
       };
     }
@@ -102,8 +102,8 @@ const pokemonReducer = (state = initialState, action) => {
           ...state[action.pokemonId],
           items: state[action.pokemonId].filter(
             (item) => item.id !== action.itemId
-          ),
-        },
+          )
+        }
       };
     }
     case ADD_ITEM: {
@@ -112,13 +112,13 @@ const pokemonReducer = (state = initialState, action) => {
         ...state,
         [action.item.pokemonId]: {
           ...state[action.item.pokemonId],
-          items: [...state[action.item.pokemonId], action.item.id],
-        },
+          items: [...state[action.item.pokemonId], action.item.id]
+        }
       };
     }
     default:
       return state;
   }
-}
+};
 
 export default pokemonReducer;

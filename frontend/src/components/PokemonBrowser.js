@@ -27,18 +27,18 @@ const PokemonBrowser = () => {
               <div
                 className={
                   Number.parseInt(pokemonId) === pokemon.id
-                    ? "nav-entry is-selected"
-                    : "nav-entry"
+                    ? 'nav-entry is-selected'
+                    : 'nav-entry'
                 }
               >
                 <div
-                  className="nav-entry-image"
+                  className='nav-entry-image'
                   style={{ backgroundImage: `url('${pokemon.imageUrl}')` }}
-                ></div>
+                />
                 <div>
-                  <div className="primary-text">{pokemon.name}</div>
-                  <div className="secondary-text">
-                    {pokemon.no} {pokemon.captured && "(Captured)"}
+                  <div className='primary-text'>{pokemon.name}</div>
+                  <div className='secondary-text'>
+                    {pokemon.no} {pokemon.captured && '(Captured)'}
                   </div>
                 </div>
               </div>
@@ -46,13 +46,13 @@ const PokemonBrowser = () => {
           );
         })}
       </nav>
-      {showForm ? (
-        <CreatePokemonForm hideForm={() => setShowForm(false)} />
-      ) : (
-        <Route path="/pokemon/:pokemonId">
-          <PokemonDetail/>
-        </Route>
-      )}
+      {showForm
+        ? (<CreatePokemonForm hideForm={() => setShowForm(false)} />)
+        : (
+          <Route path='/pokemon/:pokemonId'>
+            <PokemonDetail />
+          </Route>
+          )}
     </main>
   );
 };
